@@ -4,10 +4,19 @@
         <meta charset='utf-8'>
     </head>
     <body>
-        <div>hi</div>
-        <iframe src='iframed-page'></iframe>
+        <button id='shuffle-button'>Randomly Shuffle Iframe</button>
+        <div id='iframe-container'></div>
         <script>
-        
+            function shuffleIframe() {
+                const randomValue = Math.random();
+                const iframeSource = randomValue > 0.5 ? 'iframe-1' : 'iframe-2';
+                const iframeTag = `<iframe src="${iframeSource}"></iframe>`;
+                const container = document.querySelector('#iframe-container');
+                container.innerHTML = iframeTag;
+            }
+            window.addEventListener('load', () => shuffleIframe());
+            const button = document.querySelector('#shuffle-button');
+            button.addEventListener('click', () => shuffleIframe());
         </script>
     </body>
 </html>
