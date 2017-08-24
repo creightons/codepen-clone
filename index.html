@@ -17,6 +17,13 @@
             window.addEventListener('load', () => shuffleIframe());
             const button = document.querySelector('#shuffle-button');
             button.addEventListener('click', () => shuffleIframe());
+
+            const htmlBody = 'Hello world';
+
+            fetch('/make-file', { credentials: 'same-origin', method: 'POST', payload: { htmlBody } })
+                .then(response => response.json())
+                .then(data => { console.log('data = ', data); })
+                .catch(err => { console.log('error = ', err); });
         </script>
     </body>
 </html>
