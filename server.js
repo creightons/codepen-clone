@@ -11,6 +11,9 @@ function getFilePath(relativePath) {
 
 const server = express();
 
+server.set('view engine', 'pug');
+server.set('views', 'views');
+
 server.use((req, res, next) => {
     const url = `${req.method} ${req.url}`;
     console.log(url);
@@ -22,6 +25,11 @@ server.use(bodyParser.json());
 server.get('/', (req, res) => res.sendFile(getFilePath('./index.html')));
 server.get('/iframe-1', (req, res) => res.sendFile(getFilePath('./iframe-1.html')));
 server.get('/iframe-2', (req, res) => res.sendFile(getFilePath('./iframe-2.html')));
+
+server.get('/bounce-back', (req, res) => {
+    const args = { html: req.query.html };
+    return res.status(200).render('bounceback', args);
+});
 
 server.post('/make-file', (req, res) => {
     const { htmlBody } = req.body;
